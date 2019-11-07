@@ -5,21 +5,16 @@
 
 using namespace std;
 
-try{
-    #include "PasswordHasher.cpp"
-    #include "PasswordVerification.cpp"
-    #include "RainbowAttack.cpp"
-}
-catch{
-    cout << "Files not found.\n";
-}
+#include "PasswordHasher.cpp"
+#include "PasswordVerification.cpp"
+#include "RainbowAttack.cpp"
 
-const bool DEBUG = false;
+const bool DEBUG = true;
 
 int main(){
     if(DEBUG){
         cout << "Debugging mode is on\n";
     }
-    
+
     return 0;
 }
