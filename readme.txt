@@ -12,15 +12,19 @@ Description:  The goal of project two is to manage passwords hashed useing MD5 c
               table attack.
 Implementation
        Password Hashing:
+              - Take salt as input
               - Up to 48 bit 
               - 128-bit hash
               - 1000 cycle slow down
+              - Return hash
        Password verification:
               - Take a hash as input
-              - Compare the hash to the password file
               - The user end should compute the hash
+              - Compare the hash to the password file
+              - Return true if hash code is correct
        Rainbow Attack
-              - Create rainbow file from a dictionary of words then calculate the hashes 
-                with salt values from user ids
+              - Take the dictionary file as input
+              - Create rainbow file which contains the hash values computed from all 
+                combinations of dictionary words and salt values
               - Use password verification with input from the rainbow file as input for 
                 a password
