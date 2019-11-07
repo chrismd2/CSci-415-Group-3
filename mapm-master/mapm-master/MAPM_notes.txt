@@ -1,1 +1,0 @@
-This file can contain notes, but otherwise it's just here to create the required folders in gitHub.
