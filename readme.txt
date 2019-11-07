@@ -19,6 +19,7 @@ Implementation
               - Take a password as input
               - Convert password to hash with salt value
               - Compare the hashes
+              - The user end should compute the hash
        Rainbow Attack
               - Create rainbow file from a dictionary of words then calculate the hashes 
                 with salt values from user ids
