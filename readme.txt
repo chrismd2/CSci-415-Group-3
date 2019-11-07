@@ -16,9 +16,8 @@ Implementation
               - 128-bit hash
               - 1000 cycle slow down
        Password verification:
-              - Take a password as input
-              - Convert password to hash with salt value
-              - Compare the hashes
+              - Take a hash as input
+              - Compare the hash to the password file
               - The user end should compute the hash
        Rainbow Attack
               - Create rainbow file from a dictionary of words then calculate the hashes 
