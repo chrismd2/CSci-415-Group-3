@@ -13,10 +13,14 @@ Description:  The goal of project two is to manage passwords hashed useing MD5 c
 Implementation
        Password Hashing:
               - Take salt and password as input
-              - Up to 48 bit 
-              - 128-bit hash
+              - Up to 48 bits for salt
+              - 128-bit hash output
               - 1000 cycle slow down
               - Return hash
+              - Size information:
+                + First cycle runs with atleast 10 characters of password and upto 6 characters of salt
+                + Later cycles run with atmost 16 characters of password and no characters of salt
+                + Hash output is 16 characters
        Password verification:
               - Take a hash as input
               - The user end should compute the hash
