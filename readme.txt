@@ -12,7 +12,7 @@ Description:  The goal of project two is to manage passwords hashed useing MD5 c
               table attack.
 Implementation
        Password Hashing:
-              - Take salt as input
+              - Take salt and password as input
               - Up to 48 bit 
               - 128-bit hash
               - 1000 cycle slow down
