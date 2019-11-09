@@ -9,12 +9,14 @@ using namespace std;
 #include "PasswordVerification.cpp"
 #include "RainbowAttack.cpp"
 
-const bool DEBUG = true;
-
 int main(){
     if(DEBUG){
         cout << "Debugging mode is on\n";
     }
+
+    PasswordHasher          hasher;
+    PasswordVerification    verification;
+    RainbowAttack           attacker;
 
     return 0;
 }
