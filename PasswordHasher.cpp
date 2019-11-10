@@ -50,6 +50,9 @@ PasswordHasher::PasswordHasher(){
  */
 void PasswordHasher::run(string _password){
   fillPassVector(_password);
+  for(int i = _password.length()% HASHCHARACTERCOUNT; i > 0; i++){
+    password.push_back(_password[_password.length() - i]);
+  }
   if(DEBUG){showPassVector();}
   runHash();
   processHash();
@@ -95,7 +98,7 @@ void PasswordHasher::runHash(){
     unsigned int index = 0;
 
     for(int i = 0; i < 1000; i++){
-        if(password.size() <= HASHCHARACTERCOUNT ||index < password.size()){
+        if(index < password.size()){
             switch(index%4){
             case 0:
                 if(DEBUG){cout  << "Hashing\n\t"
