@@ -51,42 +51,12 @@ void iteratorSalt(string fileName, string password){
     file << "\n";
 }
 
+string getHash(unsigned long long&);
 int main(){
     srand(time(0));
     string str;
-    bigint passwordCount = 100000;
-    bigint divisor = 6;
-    bigint portionStart, endPoint;
-    bigint workCount = passwordCount/divisor;
-
-    if(true){
-        ifstream RainbowPortion;
-        RainbowPortion.open("Count.txt");
-        getline(RainbowPortion, str);
-        portionStart = str;
-    }
-    endPoint = portionStart + workCount;
-
-    if(true){
-        ofstream RainbowPortion;
-        RainbowPortion.open("Count.txt");
-        RainbowPortion << portionStart + endPoint;
-    }
-
-    cout << portionStart << " - " << endPoint << endl;
-    string filename = "RainbowPortion-";
-    string tempString = "";
-
-    int iteration = 0;
-    for(bigint i = 0; i < portionStart/workCount; i+=1){
-        iteration++;
-    }
-
-    tempString = to_string(iteration);
-    filename+=tempString;
-    filename+=".txt";
-    ofstream RainbowPortion;
-    RainbowPortion.open(filename);
+    bool makeRainbowTable = false;
+    bool testing = false;
 
     string Salt = salt();
     string Password = salt();
@@ -95,18 +65,102 @@ int main(){
 
     cout << "H(" << Password << ", " << Salt << ") = " <<hashCode << endl;
 
-    ifstream passFile;
-    passFile.open("LargePasswordDictionary");
-    for(bigint i = 0; i < portionStart; i+=1){
-        getline(passFile, Password);
-    }
-    for(bigint j = 0; j < workCount; j+=1){
-        iteratorSalt(filename, Password);
-        getline(passFile, Password);
+    if(makeRainbowTable){
+        bigint passwordCount = 100000;
+        bigint divisor = 10;
+        bigint portionStart, endPoint;
+        bigint workCount = passwordCount/divisor;
+
+        if(true){
+            ifstream RainbowPortion;
+            RainbowPortion.open("Count.txt");
+            getline(RainbowPortion, str);
+            portionStart = str;
+        }
+        endPoint = portionStart + workCount;
+
+        if(true){
+            ofstream RainbowPortion;
+            RainbowPortion.open("Count.txt");
+            RainbowPortion << portionStart + endPoint;
+        }
+
+        cout << portionStart << " - " << endPoint << endl;
+        string filename = "RainbowPortion-";
+        string tempString = "";
+
+        int iteration = 0;
+        for(bigint i = 0; i < portionStart/workCount; i+=1){
+            iteration++;
+        }
+
+        tempString = to_string(iteration);
+        filename+=tempString;
+        filename+=".txt";
+        ofstream RainbowPortion;
+        RainbowPortion.open(filename);
+
+        ifstream passFile;
+        passFile.open("LargePasswordDictionary");
+        for(bigint i = 0; i < portionStart; i+=1){
+            getline(passFile, Password);
+        }
+        for(bigint j = 0; j < workCount; j+=1){
+            iteratorSalt(filename, Password);
+            getline(passFile, Password);
+        }
+        passFile.close();
+        RainbowPortion.close();
     }
 
-    RainbowPortion.close();
-    passFile.close();
 
+    if(testing){
+        fstream testingFile;
+        testingFile.open("RainbowPortion-0.txt");
+        char c;
+        while(testingFile.peek() != '~'){
+            testingFile.get(c);
+            str+=c;
+        }
+        testingFile.close();
+        cout << "str length: " << str.length() << endl;
+
+        cout << hashCode << endl;
+        for (int i = 0; i < str.length(); i++){
+                cout << " ";
+        }
+
+        cout << "^" << endl;
+    }
+
+    unsigned long long offset = 0;
+    str = getHash(offset);
+
+    while(str != ""){
+        cout << (str == hashCode )<< endl;
+        str = getHash(offset);
+    }
+    //open RainbowFile.txt
     return 0;
+}
+
+string getHash(unsigned long long & offset){
+    fstream RainbowFile;
+    string str = "";
+    char c;
+    RainbowFile.open("RainbowFile.txt");
+
+    while(RainbowFile.peek() != '~'){
+        if(RainbowFile.peek() != EOF){
+            RainbowFile.get(c);
+            str+=c;
+        }
+        else{
+            str = "";
+        }
+    }
+
+    offset += str.length() + 1;
+
+    return str;
 }
