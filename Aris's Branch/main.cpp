@@ -8,7 +8,6 @@
 
 #include "rtable.cpp"
 #include "md5.h"
-#include "pwmanager.h"
 #include "bigint.cpp"
 
 using namespace std;
