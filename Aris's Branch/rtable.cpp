@@ -4,6 +4,10 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 #include "md5.cpp"
 using namespace std;
 
@@ -12,11 +16,11 @@ using namespace std;
   //  md5 MD5 = md5(hash.c_str());
 //}
 
-int rTable(){
+int rTable(string fileName){
     std::ifstream pw_file;
     pw_file.open("passwordfile.txt");
 	    std::ifstream p_file;
-    p_file.open("LargePasswordDictionary");//100000 most used passwords
+    p_file.open(fileName);
     int id;
     string salt;
     string hash;
@@ -49,5 +53,44 @@ int rTable(){
     cout<<"Program has ended.\n";
 	p_file.close();
     pw_file.close();
+}
+
+int main(){
+    time_t startTime = time(NULL);
+    double runTime;
+    ofstream outputFile;
+    outputFile.open("Output.txt");
+
+    startTime = time(0);
+	rTable("SmallPasswordDictionary");
+    runTime = difftime(time(0), startTime);
+    cout << "Time = " << runTime << endl;
+    outputFile << "Time = " << runTime << endl;
+
+    startTime = time(0);
+	rTable("SmallPasswordDictionary2");
+    runTime = difftime(time(0), startTime);
+    cout << "Time = " << runTime << endl;
+    outputFile << "Time = " << runTime << endl;
+
+    startTime = time(0);
+	rTable("LargePasswordDictionary2");
+    runTime = difftime(time(0), startTime);
+    cout << "Time = " << runTime << endl;
+    outputFile << "Time = " << runTime << endl;
+    startTime = time(0);
+
+    startTime = time(0);
+	rTable("LargePasswordDictionary3");
+    runTime = difftime(time(0), startTime);
+    cout << "Time = " << runTime << endl;
+    outputFile << "Time = " << runTime << endl;
+
+	rTable("LargePasswordDictionary");
+    runTime = difftime(time(0), startTime);
+    cout << "Time = " << runTime << endl;
+    outputFile << "Time = " << runTime << endl;
+
+    startTime = runTime;
 }
 #endif // RTABLE_CPP
